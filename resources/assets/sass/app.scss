@@ -1,0 +1,12 @@
+// compileCompact: ../../../public/css/$1.css
+
+@import "../bootstrap/scss/bootstrap.scss";
+
+#breakpoints {
+  > div {
+    display: block;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+  }
+}
