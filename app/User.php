@@ -26,4 +26,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    protected function create(array $data) {
+      return User::create([
+        'email' => $data['email'],
+        'password' => bcrypt($data['password']),
+        'affiliate_id' => str_random(10),
+      ]);
+    }
 }
