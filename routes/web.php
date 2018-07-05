@@ -15,5 +15,9 @@ Route::get('/', function () {
   return view('welcome');
 })->name('affiliate.homepage')->middleware(['auth']);
 
+Route::get('/amp', function () {
+  return view('amp');
+});
+
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
