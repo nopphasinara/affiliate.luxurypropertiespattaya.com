@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('/link', '\App\Models\Affiliate\Controllers\AffiliateLinkController@index');
+
 Route::get('/', function () {
   return view('welcome');
 })->name('affiliate.homepage')->middleware(['auth']);

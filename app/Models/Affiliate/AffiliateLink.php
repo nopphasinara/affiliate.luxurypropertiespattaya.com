@@ -4,14 +4,17 @@ namespace App\Models\Affiliate;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AffiliateUser extends Model
+class AffiliateLink extends Model
 {
     //
-    protected $table = 'affiliate_users';
+    protected $table = 'affiliate_links';
     protected $fillable = [
-      'name', 'email', 'password',
+      'name',
+      'title',
+      'uri',
+      'decription',
     ];
     protected $hidden = [
-      'password',
+      'description',
     ];
 }
