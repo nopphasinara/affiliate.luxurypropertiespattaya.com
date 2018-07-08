@@ -21,19 +21,19 @@
     <div class="xl d-none d-xl-block">xl</div>
   </div>
 
-  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-dark text-light border-bottom box-shadow">
     <h5 class="my-0 mr-md-auto font-weight-normal">{{ env('APP_NAME') }}</h5>
     <nav class="my-2 my-md-0 mr-md-3">
-      <a class="p-2 text-dark" href="{{ url('/') }}">Dashboard</a>
-      <a class="p-2 text-dark" href="{{ url('/links') }}">Your Affiliate Links</a>
-      <a class="p-2 text-dark" href="{{ url('/banners') }}">Banners</a>
-      <a class="p-2 text-dark" href="{{ url('/tops-and-tricks') }}">Tips &amp; Tricks</a>
+      <a class="p-2 text-light" href="{{ url('/') }}">Dashboard</a>
+      <a class="p-2 text-light" href="{{ url('/links') }}">Your Affiliate Links</a>
+      <a class="p-2 text-light" href="{{ url('/banners') }}">Banners</a>
+      <a class="p-2 text-light" href="{{ url('/tops-and-tricks') }}">Tips &amp; Tricks</a>
     </nav>
     @if (Route::has('login'))
       <div class="top-right links">
         @auth
-          <a class="btn btn-outline-primary" href="{{ route('home') }}">{{ auth()->user()->email }}</a>
-          <a class="btn-logout btn btn-outline-primary" data-form="formLogout" href="{{ route('logout') }}">{{ __('Logout') }}</a>
+          <a class="btn btn-light" href="{{ url('/profile') }}"><i class="fas fa-fw fa-user"></i> {{ auth()->user()->email }}</a>
+          <a class="btn-logout btn btn-secondary" data-form="formLogout" href="{{ route('logout') }}"><i class="fas fa-fw fa-sign-out-alt"></i> Logout</a>
           <form class="d-none" id="formLogout" action="{{ route('logout') }}" method="post">@csrf</form>
         @else
           <a class="btn btn-outline-primary" href="{{ route('login') }}">Login</a>
