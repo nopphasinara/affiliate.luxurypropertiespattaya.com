@@ -148,6 +148,17 @@ $(document).ready(function () {
     parent.removeClass('show');
     menu.removeClass('show');
   });
+
+  $('.btn-logout').on('click', function (evt) {
+    evt.preventDefault();
+
+    var self = $(this);
+    var form = 'formLogout';
+
+    if (typeof self.attr('data-form') != 'undefined' && self.attr('data-form')) form = self.attr('data-form');
+    form = document.getElementById(''+ form +'');
+    form.submit();
+  });
 });
 
 window.addEventListener('scroll', function () {
