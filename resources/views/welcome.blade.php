@@ -10,6 +10,7 @@
   {{-- <link rel="icon" href="../../../../favicon.ico"> --}}
 
   <title>Pricing example for Bootstrap</title>
+  <link href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" rel="stylesheet" crossorigin="anonymous">
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -22,78 +23,58 @@
     <div class="xl d-none d-xl-block">xl</div>
   </div>
 
-  @if (Route::has('login'))
-    <div class="top-right links">
-      @auth
-        <a href="{{ url('/home') }}">Home</a>
-      @else
-        <a href="{{ route('login') }}">Login</a>
-        <a href="{{ route('register') }}">Register</a>
-      @endauth
-    </div>
-  @endif
-
   <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
-    <h5 class="my-0 mr-md-auto font-weight-normal">Company name</h5>
+    <h5 class="my-0 mr-md-auto font-weight-normal">{{ env('APP_NAME') }}</h5>
     <nav class="my-2 my-md-0 mr-md-3">
-      <a class="p-2 text-dark" href="#">Features</a>
-      <a class="p-2 text-dark" href="#">Enterprise</a>
-      <a class="p-2 text-dark" href="#">Support</a>
-      <a class="p-2 text-dark" href="#">Pricing</a>
+      <a class="p-2 text-dark" href="{{ url('/') }}">Dashboard</a>
+      <a class="p-2 text-dark" href="{{ url('/links') }}">Your Affiliate Links</a>
+      <a class="p-2 text-dark" href="{{ url('/banners') }}">Banners</a>
+      <a class="p-2 text-dark" href="{{ url('/tops-and-tricks') }}">Tips &amp; Tricks</a>
     </nav>
-    <a class="btn btn-outline-primary" href="#">Sign up</a>
+    @if (Route::has('login'))
+      <div class="top-right links">
+        @auth
+          <a class="btn btn-outline-primary" href="{{ route('home') }}">{{ auth()->user()->email }}</a>
+          <a class="btn-logout btn btn-outline-primary" data-form="formLogout" href="{{ route('logout') }}">{{ __('Logout') }}</a>
+          <form class="d-none" id="formLogout" action="{{ route('logout') }}" method="post">@csrf</form>
+        @else
+          <a class="btn btn-outline-primary" href="{{ route('login') }}">Login</a>
+          <a class="btn btn-outline-primary" href="{{ route('register') }}">Register</a>
+        @endauth
+      </div>
+    @endif
+
   </div>
 
   <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4">Pricing</h1>
-    <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It's built with default Bootstrap components and utilities with little customization.</p>
+    <h1 class="display-4">{{ env('APP_NAME') }} Affiliates</h1>
+    <p class="lead">Welcome Aboard! Every new day is another chance to change your life. <a href="#">Learn how to get started</a> of {{ env('APP_NAME') }} Affiliates.</p>
   </div>
 
   <div class="container">
     <div class="card-deck mb-3 text-center">
       <div class="card mb-4 box-shadow">
         <div class="card-header">
-          <h4 class="my-0 font-weight-normal">Free</h4>
+          <h4 class="my-0 font-weight-normal">Eligibility For Next Payout</h4>
         </div>
         <div class="card-body">
-          <h1 class="card-title pricing-card-title">$0 <small class="text-muted">/ mo</small></h1>
+          <h3 class="card-title pricing-card-title">$0</h3>
           <ul class="list-unstyled mt-3 mb-4">
-            <li>10 users included</li>
-            <li>2 GB of storage</li>
-            <li>Email support</li>
-            <li>Help center access</li>
+            <li><span class="text-primary"><i class="fas fa-info"></i> Only commissions approved by manager are eligible for a payout</span></li>
+            <li>You have earned $0.00 of the minimum $75.00 requirement.</li>
           </ul>
-          <button type="button" class="btn btn-lg btn-block btn-outline-primary">Sign up for free</button>
         </div>
       </div>
       <div class="card mb-4 box-shadow">
         <div class="card-header">
-          <h4 class="my-0 font-weight-normal">Pro</h4>
+          <h4 class="my-0 font-weight-normal">Your Affiliate Link</h4>
         </div>
         <div class="card-body">
-          <h1 class="card-title pricing-card-title">$15 <small class="text-muted">/ mo</small></h1>
+          <h3 class="card-title pricing-card-title">https://luxurypropertiespattaya.com/?aid=<span class="text-muted">{{ auth()->user()->id }}</span></h3>
           <ul class="list-unstyled mt-3 mb-4">
-            <li>20 users included</li>
-            <li>10 GB of storage</li>
-            <li>Priority email support</li>
-            <li>Help center access</li>
+            <li><p class="lead mb-0">Everything starts with your personal link. Promote it freely!</p></li>
+            <li>Copy & Share your unique link with your friends or website visitors</li>
           </ul>
-          <button type="button" class="btn btn-lg btn-block btn-primary">Get started</button>
-        </div>
-      </div>
-      <div class="card mb-4 box-shadow">
-        <div class="card-header">
-          <h4 class="my-0 font-weight-normal">Enterprise</h4>
-        </div>
-        <div class="card-body">
-          <h1 class="card-title pricing-card-title">$29 <small class="text-muted">/ mo</small></h1>
-          <ul class="list-unstyled mt-3 mb-4">
-            <li>30 users included</li>
-            <li>15 GB of storage</li>
-            <li>Phone and email support</li>
-            <li>Help center access</li>
-          </ul>
-          <button type="button" class="btn btn-lg btn-block btn-primary">Contact us</button>
         </div>
       </div>
     </div>
