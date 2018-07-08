@@ -6,7 +6,6 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  {{-- <link rel="icon" href="../../../../favicon.ico"> --}}
 
   <title>Pricing example for Bootstrap</title>
   <link href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" rel="stylesheet" crossorigin="anonymous">
