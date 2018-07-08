@@ -7,7 +7,7 @@
   <meta name="keywords" content="">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>Pricing example for Bootstrap</title>
+  <title>{{ env('APP_NAME') }} Affiliates</title>
   <link href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" rel="stylesheet" crossorigin="anonymous">
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
