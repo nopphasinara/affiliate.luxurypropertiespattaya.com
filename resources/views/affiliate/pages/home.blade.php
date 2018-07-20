@@ -25,8 +25,8 @@
     <h5 class="my-0 mr-md-auto font-weight-normal">{{ env('APP_NAME') }}</h5>
     <nav class="my-2 my-md-0 mr-md-3">
       <a class="p-2 text-light" href="{{ url('/') }}">Dashboard</a>
-      <a class="p-2 text-light" href="{{ url('/links') }}">Your Affiliate Links</a>
-      <a class="p-2 text-light" href="{{ url('/banners') }}">Banners</a>
+      {{-- <a class="p-2 text-light" href="{{ url('/links') }}">Your Affiliate Links</a> --}}
+      {{-- <a class="p-2 text-light" href="{{ url('/banners') }}">Banners</a> --}}
       <a class="p-2 text-light" href="{{ url('/tops-and-tricks') }}">Tips &amp; Tricks</a>
     </nav>
     @if (Route::has('login'))
@@ -51,7 +51,7 @@
 
   <div class="container">
     <div class="card-deck mb-3 text-center">
-      <div class="card mb-4 box-shadow">
+      {{-- <div class="card mb-4 box-shadow">
         <div class="card-header">
           <h4 class="my-0 font-weight-normal">Eligibility For Next Payout</h4>
         </div>
@@ -62,7 +62,7 @@
             <li>You have earned $0.00 of the minimum $75.00 requirement.</li>
           </ul>
         </div>
-      </div>
+      </div> --}}
       <div class="card mb-4 box-shadow">
         <div class="card-header">
           <h4 class="my-0 font-weight-normal">Your Affiliate Link</h4>
@@ -77,14 +77,54 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-12">
-        <figure class="figure">
-          <img src=".../400x300" class="figure-img img-fluid rounded" alt="A generic square placeholder image with rounded corners in a figure.">
-          <figcaption class="figure-caption">A caption for the above image.</figcaption>
-        </figure>
+    @if ($affiliateLinks && $affiliateLinks->count())
+      <h3 class="my-0 mb-3 font-weight-bold">Links</h3>
+      <div class="row mb-5">
+        <div class="col-12">
+          @forelse ($affiliateLinks as $key => $item)
+            <h5 class="font-weight-normal">{{ ($loop->index + 1) . '. ' . $item->name }}</h5>
+            <div class="text-center">
+              <div class="alert alert-secondary" role="alert">
+                {{ env('APP_MAIN_URL') . $item->uri . '?aid='. auth()->user()->id }}
+              </div>
+              <div class="alert alert-secondary" role="alert">
+                {{ '<a href="'. env('APP_MAIN_URL') . $item->uri . '?aid='. auth()->user()->id .'" target="_blank">'. $item->name .'</a>' }}
+              </div>
+            </div>
+          @empty
+
+          @endforelse
+        </div>
       </div>
-    </div>
+    @endif
+
+    @if ($affiliateBanners && $affiliateBanners->count())
+      <h3 class="my-0 mb-3 font-weight-bold">Banners</h3>
+      <div class="row">
+        <div class="col-12">
+          @forelse ($affiliateBanners as $key => $item)
+            @if ($item->thumbnail)
+              <h5 class="font-weight-normal">{{ ($loop->index + 1) . '. ' . $item->name }}</h5>
+              @if ($item->description)
+                <p class="text-secondary">{{ $item->description }}</p>
+              @endif
+              <div class="text-center">
+                <figure class="figure">
+                  <img src="{{ $item->thumbnail }}" class="figure-img img-fluid" alt="{{ $item->name }}">
+                </figure>
+                <div class="alert alert-secondary" role="alert">
+                  {{ '<a href="'. env('APP_MAIN_URL') . $item->uri . '?aid='. auth()->user()->id .'" target="_blank"><img src="'. $item->thumbnail .'" alt="'. $item->name .'"></a>' }}
+                </div>
+              </div>
+            @else
+
+            @endif
+          @empty
+
+          @endforelse
+        </div>
+      </div>
+    @endif
 
     <footer class="pt-4 my-md-5 pt-md-5 border-top">
       <div class="row">

@@ -11,11 +11,10 @@
 |
 */
 
-Route::get('/link', '\App\Models\Affiliate\Controllers\AffiliateLinkController@index');
+Route::get('/', '\App\Models\Affiliate\Controllers\AffiliateLinkController@index')->name('affiliate.homepage')->middleware(['auth']);
 
-Route::get('/', function () {
-  return view('welcome');
-})->name('affiliate.homepage')->middleware(['auth']);
+Route::get('/link', '\App\Models\Affiliate\Controllers\AffiliateLinkController@link');
+
 
 Route::get('/amp', function () {
   return view('amp');

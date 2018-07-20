@@ -5,6 +5,8 @@ namespace App\Models\Affiliate\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Models\Affiliate\AffiliateLink;
+
 class AffiliateLinkController extends Controller
 {
     /**
@@ -13,6 +15,17 @@ class AffiliateLinkController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+    {
+        $affiliateBanners = AffiliateLink::banners();
+        $affiliateLinks = AffiliateLink::links();
+
+        return view('affiliate.pages.home')->with([
+          'affiliateBanners' => $affiliateBanners,
+          'affiliateLinks' => $affiliateLinks,
+        ]);
+    }
+
+    public function link()
     {
         return view('affiliate.pages.link');
     }
