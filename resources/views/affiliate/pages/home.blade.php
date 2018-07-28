@@ -21,124 +21,88 @@
     <div class="xl d-none d-xl-block">xl</div>
   </div>
 
-  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-dark text-light border-bottom box-shadow">
-    <h5 class="my-0 mr-md-auto font-weight-normal">{{ env('APP_NAME') }}</h5>
-    <nav class="my-2 my-md-0 mr-md-3">
-      <a class="p-2 text-light" href="{{ url('/') }}">Dashboard</a>
-      {{-- <a class="p-2 text-light" href="{{ url('/links') }}">Your Affiliate Links</a> --}}
-      {{-- <a class="p-2 text-light" href="{{ url('/banners') }}">Banners</a> --}}
-      <a class="p-2 text-light" href="{{ url('/tops-and-tricks') }}">Tips &amp; Tricks</a>
-    </nav>
-    @if (Route::has('login'))
-      <div class="top-right links">
-        @auth
-          <a class="btn btn-light" href="{{ url('/profile') }}"><i class="fas fa-fw fa-user"></i> {{ auth()->user()->email }}</a>
-          <a class="btn-logout btn btn-secondary" data-form="formLogout" href="{{ route('logout') }}"><i class="fas fa-fw fa-sign-out-alt"></i> Logout</a>
-          <form class="d-none" id="formLogout" action="{{ route('logout') }}" method="post">@csrf</form>
-        @else
-          <a class="btn btn-outline-primary" href="{{ route('login') }}">Login</a>
-          <a class="btn btn-outline-primary" href="{{ route('register') }}">Register</a>
-        @endauth
-      </div>
-    @endif
 
-  </div>
-
-  <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4">{{ env('APP_NAME') }} Affiliates</h1>
-    <p class="lead">Welcome Aboard! Every new day is another chance to change your life. <a href="#">Learn how to get started</a> of {{ env('APP_NAME') }} Affiliates.</p>
-  </div>
-
-  <div class="container">
-    <div class="card-deck mb-3 text-center">
-      {{-- <div class="card mb-4 box-shadow">
-        <div class="card-header">
-          <h4 class="my-0 font-weight-normal">Eligibility For Next Payout</h4>
+  <div class="container-fluid">
+    <div id="carouselExample" class="carousel slide" data-ride="carousel" data-interval="9000">
+      <div class="carousel-inner row w-100 mx-auto" role="listbox">
+        <div class="carousel-item col-md-3 active">
+          <img class="img-fluid mx-auto d-block" data-src="holder.js/100px600vh?random=yes&auto=yes&text=1" alt="slide 1">
         </div>
-        <div class="card-body">
-          <h3 class="card-title pricing-card-title">$0</h3>
-          <ul class="list-unstyled mt-3 mb-4">
-            <li><span class="text-primary"><i class="fas fa-info"></i> Only commissions approved by manager are eligible for a payout</span></li>
-            <li>You have earned $0.00 of the minimum $75.00 requirement.</li>
-          </ul>
+        <div class="carousel-item col-md-3">
+          <img class="img-fluid mx-auto d-block" data-src="holder.js/100px600vh?random=yes&auto=yes&text=2" alt="slide 2">
         </div>
-      </div> --}}
-      <div class="card mb-4 box-shadow">
-        <div class="card-header">
-          <h4 class="my-0 font-weight-normal">Your Affiliate Link</h4>
+        <div class="carousel-item col-md-3">
+          <img class="img-fluid mx-auto d-block" data-src="holder.js/100px600vh?random=yes&auto=yes&text=3" alt="slide 3">
         </div>
-        <div class="card-body">
-          <h3 class="card-title pricing-card-title">https://luxurypropertiespattaya.com/?aid=<span class="text-muted">{{ auth()->user()->id }}</span></h3>
-          <ul class="list-unstyled mt-3 mb-4">
-            <li><p class="lead mb-0">Everything starts with your personal link. Promote it freely!</p></li>
-            <li>Copy & Share your unique link with your friends or website visitors</li>
-          </ul>
+        <div class="carousel-item col-md-3">
+          <img class="img-fluid mx-auto d-block" data-src="holder.js/100px600vh?random=yes&auto=yes&text=4" alt="slide 4">
+        </div>
+        <div class="carousel-item col-md-3">
+          <img class="img-fluid mx-auto d-block" data-src="holder.js/100px600vh?random=yes&auto=yes&text=5" alt="slide 5">
+        </div>
+        <div class="carousel-item col-md-3">
+          <img class="img-fluid mx-auto d-block" data-src="holder.js/100px600vh?random=yes&auto=yes&text=6" alt="slide 6">
+        </div>
+        <div class="carousel-item col-md-3">
+          <img class="img-fluid mx-auto d-block" data-src="holder.js/100px600vh?random=yes&auto=yes&text=7" alt="slide 7">
+        </div>
+        <div class="carousel-item col-md-3">
+          <img class="img-fluid mx-auto d-block" data-src="holder.js/100px600vh?random=yes&auto=yes&text=8" alt="slide 7">
         </div>
       </div>
+      <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+        <i class="fa fa-chevron-left fa-lg text-muted"></i>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next text-faded" href="#carouselExample" role="button" data-slide="next">
+        <i class="fa fa-chevron-right fa-lg text-muted"></i>
+        <span class="sr-only">Next</span>
+      </a>
     </div>
-
-    @if ($affiliateLinks && $affiliateLinks->count())
-      <h3 class="my-0 mb-3 font-weight-bold">Links</h3>
-      <div class="row mb-5">
-        <div class="col-12">
-          @forelse ($affiliateLinks as $key => $item)
-            <h5 class="font-weight-normal">{{ ($loop->index + 1) . '. ' . $item->name }}</h5>
-            <div class="text-center">
-              <div class="alert alert-secondary" role="alert">
-                {{ env('APP_MAIN_URL') . $item->uri . '?aid='. auth()->user()->id }}
-              </div>
-              <div class="alert alert-secondary" role="alert">
-                {{ '<a href="'. env('APP_MAIN_URL') . $item->uri . '?aid='. auth()->user()->id .'" target="_blank">'. $item->name .'</a>' }}
-              </div>
-            </div>
-          @empty
-
-          @endforelse
-        </div>
-      </div>
-    @endif
-
-    @if ($affiliateBanners && $affiliateBanners->count())
-      <h3 class="my-0 mb-3 font-weight-bold">Banners</h3>
-      <div class="row">
-        <div class="col-12">
-          @forelse ($affiliateBanners as $key => $item)
-            @if ($item->thumbnail)
-              <h5 class="font-weight-normal">{{ ($loop->index + 1) . '. ' . $item->name }}</h5>
-              @if ($item->description)
-                <p class="text-secondary">{{ $item->description }}</p>
-              @endif
-              <div class="text-center">
-                <figure class="figure">
-                  <img src="{{ $item->thumbnail }}" class="figure-img img-fluid" alt="{{ $item->name }}">
-                </figure>
-                <div class="alert alert-secondary" role="alert">
-                  {{ '<a href="'. env('APP_MAIN_URL') . $item->uri . '?aid='. auth()->user()->id .'" target="_blank"><img src="'. $item->thumbnail .'" alt="'. $item->name .'"></a>' }}
-                </div>
-              </div>
-            @else
-
-            @endif
-          @empty
-
-          @endforelse
-        </div>
-      </div>
-    @endif
-
-    <footer class="pt-4 my-md-5 pt-md-5 border-top">
-      <div class="row">
-        <div class="col-12 col-md">
-          &copy Copyright 2018 {{ env('APP_NAME') }}. All Rights Reserved.
-        </div>
-      </div>
-    </footer>
   </div>
 
 
   <!-- Bootstrap core JavaScript
   ================================================== -->
-  <script src="{{ asset('js/app.js') }}" crossorigin="anonymous" async></script>
-  
+  <script src="{{ asset('js/app.js') }}" crossorigin="anonymous"></script>
+  <script>
+  $('#carouselExample').on('slide.bs.carousel', function (e) {
+
+    var $e = $(e.relatedTarget);
+    var idx = $e.index();
+    var itemsPerSlide = 4;
+    var totalItems = $('.carousel-item').length;
+
+    if (idx >= totalItems-(itemsPerSlide-1)) {
+      var it = itemsPerSlide - (totalItems - idx);
+      for (var i=0; i<it; i++) {
+        // append slides to end
+        if (e.direction=="left") {
+          $('.carousel-item').eq(i).appendTo('.carousel-inner');
+        }
+        else {
+          $('.carousel-item').eq(0).appendTo('.carousel-inner');
+        }
+      }
+    }
+  });
+
+  self.addEventListener('fetch', event => {
+    //caching for offline viewing
+    const {request} = event;
+    const url = new URL(request.url);
+    if(url.origin === location.origin) {
+      event.respondWith(cacheData(request));
+    } else {
+      event.respondWith(networkFirst(request));
+    }
+  });
+
+  async function cacheData(request) {
+    const cachedResponse = await caches.match(request);
+    return cachedResponse || fetch(request);
+  }
+  </script>
+
 </body>
 </html>

@@ -115,6 +115,17 @@ window.GC = {
   },
 };
 
+
+async function logFetch(url) {
+  try {
+    const response = await fetch(url);
+    console.log(await response.text());
+  }
+  catch (err) {
+    console.log('fetch failed', err);
+  }
+}
+
 $(document).ready(function () {
   GC.setDevice();
 
@@ -159,6 +170,27 @@ $(document).ready(function () {
     form = document.getElementById(''+ form +'');
     form.submit();
   });
+
+  $(function () {
+    $('[data-toggle="popover"]').popover();
+  });
+
+  $("#payment-button").click(function (e) {
+    // Fetch form to apply Bootstrap validation
+    var form = $(this).parents('form');
+
+    if (form[0].checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+    } else {
+      // Perform ajax submit here
+      form.submit();
+    }
+
+    form.addClass('was-validated');
+  });
+
+  // return JSON.parse(JSON.stringify(this._data));
 });
 
 window.addEventListener('scroll', function () {
