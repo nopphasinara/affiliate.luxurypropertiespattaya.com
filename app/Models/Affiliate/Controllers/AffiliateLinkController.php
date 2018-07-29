@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Models\Affiliate\AffiliateLink;
+use App\Models\Listing\Listing;
 
 class AffiliateLinkController extends Controller
 {
@@ -18,10 +19,12 @@ class AffiliateLinkController extends Controller
     {
         $affiliateBanners = AffiliateLink::banners();
         $affiliateLinks = AffiliateLink::links();
+        $listings = Listing::where('web_visible', 1)->paginate(10);
 
         return view('affiliate.pages.home')->with([
           'affiliateBanners' => $affiliateBanners,
           'affiliateLinks' => $affiliateLinks,
+          'listings' => $listings,
         ]);
     }
 
