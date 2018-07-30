@@ -17,7 +17,7 @@
         <tbody>
           @foreach ($listings as $key => $listing)
             <tr>
-              <td class="px-2 py-3 text-center"><img class="shadow" src="{{ env('APP_MAIN_URL') . '/uploads/'. $listing->image .'' }}" width="180" alt="{{ $listing->name }}" /></td>
+              <td class="px-2 py-3 text-center"><img class="shadow" src="{{ env('APP_MAIN_URL') . '/uploads/thumbnails/' . $listing->thumbnail }}" width="180" alt="{{ $listing->name }}" /></td>
               <td class="px-2 py-3">
                 <div class="link-name border-bottom pb-2 mb-2 h5">
                   <span class="badge badge-success font-weight-bold">[{{ $listing->refno }}]</span> <span class="font-weight-bold">{{ $listing->name }}</span>
